@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>表单&状态&事件</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+
+    </div>
+  </body>
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+
+    // 定义CheckBox
+    var RTCheckBox = React.createClass({
+
+      //定义初始状态
+      getInitialState: function() {
+        return {
+          //这里设置属性将会存储在state中
+          isSelected: false
+        }
+      },
+
+      //定义事件绑定的方法
+      onHandleClick: function(){
+        //设置状态
+        this.setState({
+          isSelected: !this.state.isSelected
+        });
+      },
+
+      //当state发生变化时，会调用组件内这里的render方法
+      render: function(){
+        var text = this.state.isSelected ? "已选中" : "未选中";
+        return (
+          <div>
+            <input type="checkbox" onChange={this.onHandleClick} />
+            {text}
+            <p></p>
+          </div>
+        );
+      }
+    });
+
+    // 定义输入框
+    var RTInputText = React.createClass({
+
+      getInitialState: function(){
+        return {
+          text: "plz input text"
+        }
+      },
+      onHandleInputText: function(event) {
+        this.setState({
+          text: event.target.value
+        });
+      },
+      render: function() {
+        var text = this.state.text
+        return (
+        <div>
+          <input type="text" value={text} onChange={this.onHandleInputText}/>
+          <p>输入的内容为：{text}</p>
+        </div>
+        );
+      }
+    });
+
+    // 定义容器组件
+    var RTContainer = React.createClass({
+      render: function() {
+        return (
+        <div>
+          <RTCheckBox/>
+          <RTInputText/>
+        </div>
+        );
+      }
+    });
+
+
+    ReactDOM.render(
+    <RTContainer />,
+    document.getElementById("container")
+    );
+  </script>
+</html>

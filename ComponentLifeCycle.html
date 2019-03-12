@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>组件的生命周期</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+
+    </div>
+  </body>
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+/*
+    1、组件的生命周期共分三种状态：
+      mounting: 组件挂载，已插入真实DOM；
+      updating: 组件更新，正在被重新渲染；
+      unmounting: 组件移除，已移除真实DOM。
+
+    2、组件的生命根据状态可分四个阶段：
+      创建、实例化、更新、销毁
+*/
+
+/*
+    组件生命周期相关的函数：
+
+    1、mounting/组件挂载相关：
+      (1) componentWillMount
+        组件将要挂载，在render之前执行，且只执行一次，即使重复渲染该组件，或者改变该组件的state；
+      (2) componentDidMount
+        组件已挂载，在render之后执行，同一个组件重复渲染也只会执行一次；
+
+    2、updating/组件更新相关：
+      (1) componentWillReceiveProps(object nextProps)
+        已加载的组件收到新的props之前调用，组件初始化渲染时不会调用；
+      (2) shouldComponentUpdate(object nextProps, object nextState)
+        判断组件是否重新渲染时调用，组件收到新的props或者state时，会立刻调用；
+      (3) componentWillUpdate(object nextProps, object nextState)
+        组件将要更新
+      (4) componentDidUpdate(object preProps, object preState)
+        组件已经更新
+
+    3、unmounting/组件移除相关：
+      componentWillUnmount
+      组件即将被移除之前调用，
+
+    4、生命周期中与props和state相关：
+      (1) getDefaultProps 设置props默认值
+      (2) getInitialState 设置state初始值
+*/
+
+var RTComponent = React.createClass({
+  /*1、创建阶段
+    流程：
+      getDefaultProps
+  */
+
+  getDefaultProps: function() {
+    console.log("getDefaultProps");
+    return {
+      //设置this.props.属性的默认值
+    };
+  },
+
+  /*2、实例化阶段
+    流程：
+    getInitialState
+    componentWillMount
+    render
+    componentDidMount
+  */
+
+  getInitialState: function() {
+    console.log("getInitialState");
+    return null;
+  },
+  componentWillMount: function() {
+    console.log("componentWillMount");
+  },
+  render: function() {
+    console.log("render");
+    return <div>Hello~</div>
+  },
+  componentDidMount: function() {
+    console.log("componentDidMount");
+  },
+
+  /*3、更新阶段
+    流程：
+    componentWillReceiveProps
+    shouldComponentUpdate
+    componentWillUpdate
+    render
+    componentDidUpdate
+  */
+  componentWillReceiveProps: function() {
+    console.log("componentWillReceiveProps");
+  },
+  shouldComponentUpdate: function() {
+    console.log("shouldComponentUpdate");
+    return true;
+  },
+  componentWillUpdate: function() {
+    console.log("componentWillUpdate");
+  },
+  componentDidUpdate: function() {
+    console.log("componentDidUpdate");
+  },
+
+  /*4、销毁阶段
+    流程：
+    componentWillUnmount
+  */
+  componentWillUnmount: function() {
+    console.log("componentWillUnmount");
+  }
+});
+
+  //第一次创建并加载组件
+  ReactDOM.render(
+  <RTComponent/>,
+  document.getElementById("container")
+  );
+
+  //重新渲染组件
+  ReactDOM.render(
+  <RTComponent/>,
+  document.getElementById("container")
+  );
+
+  //移除组件
+  ReactDOM.unmountComponentAtNode(document.getElementById("container"));
+  
+  </script>
+</html>
