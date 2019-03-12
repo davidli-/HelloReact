@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>props</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+
+    </div>
+  </body>
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+    //子组件1
+    var WebName = React.createClass({
+      render: function(){
+        return <h1>{this.props.webName}</h1>;
+      }
+    });
+
+    //子组件2
+    var WebLink = React.createClass({
+      render: function(){
+        return (<a href={this.props.webLink}>{this.props.webLink}</a>);
+      }
+    });
+
+    //父组件
+    var WebShow = React.createClass({
+      render: function(){
+        return (
+          <div>
+            <WebName webName={this.props.wName}/>
+            <WebLink webLink={this.props.wLink}/>
+          </div>
+        );
+      }
+    });
+
+    //渲染组件
+    ReactDOM.render(
+      <WebShow wName="This is a website:" wLink="https://davidlii.cn"/>,
+      document.getElementById("container")
+    );
+  </script>
+</html>

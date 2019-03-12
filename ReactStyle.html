@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>样式</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+
+    <style>
+      .pStyle{
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+
+    </div>
+  </body>
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+    //在此处编辑React代码
+    //React中的样式分三种：内联、对象、选择器。
+
+    //h1样式对象
+    var hStyle = {
+      backgroundColor: "green",
+      color: "red"
+    }
+
+    //创建DOM节点
+    var MessDiv = React.createClass({
+      render: function (){
+        return (
+          // 1、div标签使用内联样式
+          <div style={{backgroundColor:"yellow", borderWidth:5, borderColor:"black", borderStyle:"solid"}}>
+
+            //2、h1标签使用对象样式
+            <h1 style={hStyle}>
+              This is h1 style~ The var is : {this.props.var1}
+            </h1>
+
+            //3、p标签使用选择器样式
+            <p className="pStyle">
+              This is p style~ The var is : {this.props.var2}
+            </p>
+          </div>
+        );
+      }
+    });
+
+    //创建并渲染节点
+    ReactDOM.render(
+      <MessDiv var1="变量1" var2="变量2"/>,
+      document.getElementById('container')
+    );
+  </script>
+</html>

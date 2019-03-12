@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js" charset="utf-8"></script> -->
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+    </div>
+
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+    /*
+    ReactDOM.render()函数
+    *用于将模板转换成HTML语言，渲染DOM，并插入到指定的DOM节点中。
+    *接收3个参数：
+      第1个：模板的渲染内容（HTML形式）；
+      第2个：模板需要插入到的DOM节点；
+      第3个：渲染后的回调（一般用不到）。
+    */
+    var text = " from David~";
+    ReactDOM.render(
+      <h1>
+        Hello React,{text}
+      </h1>,
+      document.getElementById('container')
+    );
+  </script>
+  </body>
+</html>

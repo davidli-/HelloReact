@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>子节点属性</title>
+    <!-- React的核心库 -->
+    <script src="./build/react.js" charset="utf-8"></script>
+    <!-- 提供与DOM相关的功能 -->
+    <script src="./build/react-dom.js" charset="utf-8"></script>
+    <!-- 将JSX语法转换成JAVAScript语法 -->
+    <script src="./build/browser.min.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <!-- react渲染的内容会插入到此DOM节点中 -->
+    <div id="container">
+
+    </div>
+  </body>
+  <!-- 在react中使用JSX，跟JavaScript不兼容 -->
+  <!-- babel是一个编译转换器，将ES6转换成可以在浏览器中运行的代码 -->
+  <script type="text/babel">
+
+    //定义一个列表，列表项目的数量和项目中的内容，都由外部决定
+    var ListComponent = React.createClass({
+      render: function(){
+        return (
+        <ul>
+          {
+            /*通过this.props.children从父组件中获取需要展示的列表项
+            *获取到内容之后，遍历childre，逐项进行设置
+
+            使用React.Children.map()方法
+            第1个参数：父组件中获取子节点；
+            第2个参数：遍历子节点的方法；
+            */
+            React.Children.map(this.props.children, function(child){
+              return <li>{child}</li>
+            })
+          }
+        </ul>
+        );
+      }
+    });
+
+    ReactDOM.render(
+    (
+      <ListComponent>
+        <h1>Hello</h1>
+        <a href="https://davidlii.cn">https://davidlii.cn</a>
+      </ListComponent>
+    ),
+    document.getElementById("container")
+    );
+
+  </script>
+</html>
